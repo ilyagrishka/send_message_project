@@ -1,0 +1,39 @@
+{% extends 'service/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for article in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ article.preview | media_filter }}">
+                    <div class="card-body">
+                        <p class="card-text">{{ article.title | title }}</p>
+                        <p class="card-text">Содержимое статьи: {{ blog.description | name }}</p>
+                        <p class="card-text">Дата создания: {{ blog.created_date }}</p>
+                        <p class="card-text">Количество просмотров: {{ blog.views_counter }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn">
+                                <a class="btn btn-primary" href="{% url 'blog:blog_detail' article.pk %}" role="button">Посмотреть</a>
+                                {% if user.is_authenticated %}
+                                <a class="btn btn-success" href="{% url 'blog:blog_update' article.pk %}" role="button">Редактировать</a>
+                                <a class="btn btn-danger" href="{% url 'blog:blog_delete' article.pk %}" role="button">Удалить</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row text-right mt-4">
+            <div class="col-12">
+                {% if user.is_authenticated %}
+                <a class="btn btn-secondary my-2" href="{% url 'blog:blog_create' %}">Создать блог</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
