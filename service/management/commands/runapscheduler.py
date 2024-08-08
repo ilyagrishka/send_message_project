@@ -12,7 +12,7 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 from django_apscheduler import util
 
-from service.apscedular_send_mails.send_mail import send_mails
+from service.apscedular_send_mails.send_message import send_message
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
         scheduler.add_job(
-            send_mails,
+            send_message,
             trigger=IntervalTrigger(seconds=10),  # Every 10 seconds
             id="my_job",  # The `id` assigned to each job MUST be unique
             max_instances=1,
