@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="profile-container">
+    <div class="profile-header">
+      {% if user_profile.avatar %}
+        <img src="{{ user_profile.avatar.url }}" alt="{{ user_profile.username }}'s avatar" class="profile-avatar">
+      {% else %}
+        <div class="profile-avatar-placeholder">{{ user_profile.username|first|upper }}</div>
+      {% endif %}
+      <h1>{{ user_profile.username }}</h1>
+    </div>
+
+    <div class="profile-info">
+      {% if user_profile.country %}
+        <p class="profile-bio">{{ user_profile.country }}</p>
+      {% endif %}
+
+      {% if user_profile.phone_number %}
+        <p class="profile-location">Location: {{ user_profile.phone_number}}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

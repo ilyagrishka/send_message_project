@@ -23,6 +23,7 @@ class MailingListView(ListView):
 
 class MailingSettingsCreateView(CreateView):
     model = MailingSettings
+    fields = "__all__"
     success_url = reverse_lazy("service:mailing_list")
 
     def form_valid(self, form):
@@ -34,6 +35,7 @@ class MailingSettingsCreateView(CreateView):
 
 class MailingSettingsUpdateView(UpdateView):
     model = MailingSettings
+    fields = "__all__"
     success_url = reverse_lazy("service:mailing_list")
 
     def get_object(self, queryset=None):
@@ -57,7 +59,7 @@ class MailingSettingsDetailView(DetailView):
 
 class MailingSettingsDeleteView(DeleteView):
     model = MailingSettings
-    success_url = reverse_lazy("service:mailing_list")
+    success_url = reverse_lazy("service:mailingmessage_confirm_delete.html")
 
 
 class ClientOfServiceListView(ListView):
@@ -84,6 +86,7 @@ class ClientOfServiceDetail(DetailView):
 class ClientOfServiceCreate(CreateView):
     model = ClientOfService
     success_url = reverse_lazy("service:mailing_list")
+    fields = "__all__"
 
     def form_valid(self, form):
         if form.is_valid():
@@ -96,13 +99,13 @@ class ClientOfServiceCreate(CreateView):
 
 class ClientOfServiceUpdateView(UpdateView):
     model = ClientOfService
-
-    success_url = reverse_lazy("service:mailing_list")
+    fields = "__all__"
+    success_url = reverse_lazy("service:client_list")
 
 
 class ClientOfServiceDeleteView(DeleteView):
     model = ClientOfService
-    success_url = reverse_lazy("service:mailing_list")
+    success_url = reverse_lazy("service:client_confirm_delete")
 
 
 class MailingMessageListView(ListView):
@@ -128,6 +131,7 @@ class MailingMessageDetail(DetailView):
 
 class MailingMessageCreate(CreateView):
     model = MailingMessage
+    fields = "__all__"
     success_url = reverse_lazy("service:mailing_list")
 
     def form_valid(self, form):
@@ -140,7 +144,7 @@ class MailingMessageCreate(CreateView):
 
 class MailingMessageUpdateView(UpdateView):
     model = MailingMessage
-
+    fields = "__all__"
     success_url = reverse_lazy("service:mailing_list")
 
 

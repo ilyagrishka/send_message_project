@@ -19,10 +19,10 @@
                     <tbody>
                     {% for log in object_list %}
                     <tr>
-                        <td>{{ log.mailing_list.title }}</td>
-                        <td>{{ log.time }}</td>
-                        <td>{{ log.status }}</td>
-                        <td>{{ log.server_response }}</td>
+                        <td>{{ MailingLog.mailing_list.title }}</td>
+                        <td>{{ MailingLog.last_try }}</td>
+                        <td>{{ MailingLog.status }}</td>
+                        <td>{{ MailingLog.server_response }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

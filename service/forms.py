@@ -15,6 +15,7 @@ class StyleFormMixin:
 class ClientOfServiceForm(ModelForm):
     class Meta:
         model = ClientOfService
+        fields = "__all__"
         exclude = ("comments", "owner")
 
 
@@ -28,3 +29,4 @@ class MailingMessageForm(ModelForm):
     class Meta:
         model = MailingMessage
         exclude = ("owner",)
+        fields = "__all__"
