@@ -32,6 +32,12 @@ class MailingSettingsCreateView(CreateView):
         self.object.save()
         return super().form_valid(form)
 
+    def email_attempts_view(self):
+        email_attempts = MailingSettings.objects.all().order_by('-created_at')
+        context = {
+            'email_attempts': email_attempts
+        }
+        return render(self.request, 'attempt_to_send.html', context)
 
 class MailingSettingsUpdateView(UpdateView):
     model = MailingSettings

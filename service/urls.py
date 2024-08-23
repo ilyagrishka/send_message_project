@@ -13,6 +13,7 @@ urlpatterns = [
     path("create/", MailingSettingsCreateView.as_view(), name="mailing_create"),
     path("update/<int:pk>/", MailingSettingsUpdateView.as_view(), name="mailing_update"),
     path("delete/<int:pk>/", MailingSettingsDeleteView.as_view(), name="mailing_delete"),
+    path('email-attempts/', views.email_attempts_view, name='attempt_to_send'),
 
     path("clients/", ClientOfServiceListView.as_view(), name="clients_list"),
     path("clients/create/", ClientOfServiceCreate.as_view(), name="clients_create"),
