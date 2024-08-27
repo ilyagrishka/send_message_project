@@ -1,7 +1,12 @@
+import email
+
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+
+from service.cache_services import get_product_from_cache
 from service.models import MailingSettings, ClientOfService, MailingMessage
 from django.utils.text import slugify
 
@@ -32,12 +37,14 @@ class MailingSettingsCreateView(CreateView):
         self.object.save()
         return super().form_valid(form)
 
-    def email_attempts_view(self):
-        email_attempts = MailingSettings.objects.all().order_by('-created_at')
-        context = {
-            'email_attempts': email_attempts
-        }
-        return render(self.request, 'attempt_to_send.html', context)
+
+def email_attempts_view(request):
+    email_attempts = MailingSettings.objects.all().order_by('-created_at')
+    context = {
+        'email_attempts': email_attempts
+    }
+    return render(request, 'attempt_to_send.html', context)
+
 
 class MailingSettingsUpdateView(UpdateView):
     model = MailingSettings
@@ -74,7 +81,8 @@ class ClientOfServiceListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(publication_status=True)
+        queryset = queryset.filter(owner=self.request.user.pk)
+        queryset = get_product_from_cache()
         return queryset
 
 
@@ -120,7 +128,7 @@ class MailingMessageListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(publication_status=True)
+        queryset = queryset.filter(owner=self.request.user.pk)
         return queryset
 
 
@@ -157,3 +165,13 @@ class MailingMessageUpdateView(UpdateView):
 class MailingMessageDeleteView(DeleteView):
     model = MailingMessage
     success_url = reverse_lazy("service:mailing_list")
+
+
+@login_required
+def main_page(request):
+    context = {
+        "mailing_count": MailingSettings.objects.all().count(),
+        "mailing_count_active": MailingSettings.objects.filter(is_active=True).count(),
+        "uniq_clients_for_mailing": ClientOfService.objects.values(email).distincts().count()
+    }
+    return render(request, "service/home_page.html", context=context)

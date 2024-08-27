@@ -19,9 +19,9 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{all_mailings}}</td>
-                    <td>{{active_mailings}}</td>
-                    <td>{{active_clients}}</td>
+                    <td>{{mailing_count}}</td>
+                    <td>{{mailing_count_active}}</td>
+                    <td>{{uniq_clients_for_mailing}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -31,10 +31,10 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for object in random_blogs %}
+            {% for object in blogs %}
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="{{ object.preview }}">
+
                     <div class="card-body">
                         <p class="card-text">{{ object.title | title }}</p>
                         <p class="card-text">Содержимое статьи: {{ object.description  }}</p>

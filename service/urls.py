@@ -1,5 +1,6 @@
 from django.urls import path
 
+from service import views
 from service.apps import ServiceConfig
 from service.views import MailingListView, MailingSettingsCreateView, MailingSettingsUpdateView, \
     MailingSettingsDeleteView, ClientOfServiceListView, ClientOfServiceUpdateView, ClientOfServiceDeleteView, \
@@ -14,6 +15,7 @@ urlpatterns = [
     path("update/<int:pk>/", MailingSettingsUpdateView.as_view(), name="mailing_update"),
     path("delete/<int:pk>/", MailingSettingsDeleteView.as_view(), name="mailing_delete"),
     path('email-attempts/', views.email_attempts_view, name='attempt_to_send'),
+    path("home/", views.main_page, name="mailing_count"),
 
     path("clients/", ClientOfServiceListView.as_view(), name="clients_list"),
     path("clients/create/", ClientOfServiceCreate.as_view(), name="clients_create"),
