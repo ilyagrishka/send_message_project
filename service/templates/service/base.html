@@ -1,5 +1,6 @@
 {% load cache %}
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -28,22 +29,23 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{% url 'blog:blog_list'%}">Блог</a>
+     <a href="attempt_to_send.html" class="btn-send-email">Попытки рассылки</a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{%'service:clients_list'%}" id="dropdown01" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="{% url 'service:clients_list' %}" id="dropdown01" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Клиенты</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{% url 'service:clients_list'%}">Список клиентов</a>
-                    <a class="dropdown-item" href="{% url 'service:clients_create' %}">Добавить клиента</a>
+                    <a class="dropdown-item" href="{% url 'service:mailing_list' %}">Добавить клиента</a>
                     <a class="dropdown-item" href="#"></a>
                 </div>
 
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href='{% "service:mailing_create" %}' id="dropdown02" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href='{% url "service:mailing_list" %}' id="dropdown02" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Сообщения для рассылки</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{% url 'service:mailing_message_list'%}">Список сообщений</a>

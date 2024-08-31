@@ -40,6 +40,7 @@ class MailingSettingsCreateView(CreateView):
 
 def email_attempts_view(request):
     email_attempts = MailingSettings.objects.all().order_by('-created_at')
+
     context = {
         'email_attempts': email_attempts
     }
