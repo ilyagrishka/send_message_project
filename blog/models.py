@@ -16,6 +16,8 @@ class Blog(models.Model):
         upload_to="product/photo",
         verbose_name="Фото",
         help_text="Загрузите новое фото",
+        blank=True,
+        null=True
     )
 
     created_date = models.DateTimeField(

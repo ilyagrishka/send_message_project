@@ -6,8 +6,9 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
+from blog.models import Blog
 from service.cache_services import get_product_from_cache
-from service.models import MailingSettings, ClientOfService, MailingMessage
+from service.models import MailingSettings, ClientOfService, MailingMessage, MailingLog
 from django.utils.text import slugify
 
 
@@ -39,12 +40,12 @@ class MailingSettingsCreateView(CreateView):
 
 
 def email_attempts_view(request):
-    email_attempts = MailingSettings.objects.all().order_by('-created_at')
+    email_attempts = MailingLog.objects.all().order_by('last_try')
 
     context = {
         'email_attempts': email_attempts
     }
-    return render(request, 'attempt_to_send.html', context)
+    return render(request, 'service/attempt_to_send.html', context)
 
 
 class MailingSettingsUpdateView(UpdateView):
@@ -172,7 +173,8 @@ class MailingMessageDeleteView(DeleteView):
 def main_page(request):
     context = {
         "mailing_count": MailingSettings.objects.all().count(),
-        "mailing_count_active": MailingSettings.objects.filter(is_active=True).count(),
-        "uniq_clients_for_mailing": ClientOfService.objects.values(email).distincts().count()
+        "mailing_count_active": MailingSettings.objects.filter(status="STATUS_CREATED").count(),
+        "uniq_clients_for_mailing": ClientOfService.objects.distinct().count(),
+        "blogs": Blog.objects.all()
     }
     return render(request, "service/home_page.html", context=context)

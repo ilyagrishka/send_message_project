@@ -4,6 +4,7 @@
     <h6 class="display-1">Сервис рассылок</h6>
 </div>
 <header>
+
 </header>
 <div class="container col-10">
     <div class="card-body">
@@ -41,7 +42,7 @@
                         <p class="card-text">Количество просмотров: {{ object.views_counter }}</p>
                     </div>
                     <div class="btn">
-                    <a class="btn btn-primary" href="{% url 'blog:blog_details' object.pk %}" role="button">Посмотреть</a>
+                    <a class="btn btn-primary" href="{% url 'blog:blog_detail' object.pk %}" role="button">Посмотреть</a>
                     </div>
                 </div>
             </div>

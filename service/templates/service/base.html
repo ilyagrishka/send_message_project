@@ -23,13 +23,13 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="{% url 'service:mailing_list'%}">Главная</a>
+    <a class="navbar-brand" href="{% url 'service:mailing_count'%}">Главная</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{% url 'blog:blog_list'%}">Блог</a>
-     <a href="attempt_to_send.html" class="btn-send-email">Попытки рассылки</a>
+     <a href="{% url 'service:attempt_to_send' %}" class="btn-send-email">Попытки рассылки</a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">

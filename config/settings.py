@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG",False) == "True"
+DEBUG = os.getenv("DEBUG", False) == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -57,13 +57,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
- 'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('NAME'),
-        "USER":  os.getenv("USER"),
+        "USER": os.getenv("USER"),
         'PASSWORD': os.getenv('PASSWORD'),
-        'HOST':  os.getenv('HOST'),
-        'PORT':  os.getenv('PORT')
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT')
     }
 }
 
@@ -120,4 +120,3 @@ if CASHED_ENABLED:
             'LOCATION': os.getenv('LOCATION')
         }
     }
-
